@@ -1,8 +1,8 @@
 <?php
 
-namespace Auto;
+namespace auto;
     
-trait BackMove
+trait backmove
 {
     public function setBackAuto()
     {
