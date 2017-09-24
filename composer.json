@@ -1,0 +1,18 @@
+{
+    "name": "mike/loft_task5.local",
+    "description": "task5",
+    "authors": [
+        {
+            "name": "mike-a-b",
+            "email": "mike.a.b@yandex.ru"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Auto\\": "auto/",
+            "Vendor\\Namespace\\": ""
+        }
+    }
+
+}
