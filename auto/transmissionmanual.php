@@ -1,13 +1,13 @@
 <?php
+namespace Auto;
 
-namespace auto;
-
-trait transmissiomanual
+require_once 'backmove.php';
+trait TransmissionManual
 {
     public $gear;
     public $manual;
-    use backmove {
-        backmove::setBackManual as setBack;
+    use Backmove {
+        Backmove::setBackManual as setBack;
     }
     
     public function setTransmissionManual()

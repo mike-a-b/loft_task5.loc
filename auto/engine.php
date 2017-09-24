@@ -1,8 +1,8 @@
 <?php
 
-namespace auto;
+namespace Auto;
     
-trait engine
+trait Engine
 {
     public $enginePower; //кол-во лош. сил
     public $temperature;
@@ -27,7 +27,7 @@ trait engine
         $this->setPower(intval($power));
         $this->setTemperature(0);
         $this->setMaxSpeed();
-        echo "У двигателя $this->enginePower л. с. машина может развить скорость $this->maxSpeed<br>".PHP_EOL;
+        print "У двигателя $this->enginePower л. с. машина может развить скорость $this->maxSpeed<br>".PHP_EOL;
     }
     
     public function engineOn()
@@ -40,13 +40,13 @@ trait engine
         print "Выключается двигатель...Температура $this->temperature(*гр) <br>".PHP_EOL;
     }
     
-    public function temperatureUp($val)
+    public function temperatureUp(int $val)
     {
-        $val ? ($this->temperature += $val) : ($this->temperature += 5);
+        $this->temperature += isset($val) ? $val : 5;
         print "t (двигателя) = $this->temperature(*гр) <br>".PHP_EOL;
         if ($this->temperature >= 90) {
             $this->temperature -= 10;
-            print "Включился вентилятор, снижена температура на 10(*гр),  t= $this->temperature(*гр) <br>". PHP_EOL;
+            return print ("Включился вентилятор, снижена температура на 10(*гр),  t= $this->temperature(*гр) <br>". PHP_EOL);
         }
     }
 }

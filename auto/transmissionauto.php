@@ -1,13 +1,14 @@
 <?php
 
-namespace auto;
+namespace Auto;
 
-trait transmissionauto
+require_once 'backmove.php';
+trait TransmissionAuto
 {
     public $direct; //направление движения
     public $auto;
-    use backmove {
-        backmove::setBackAuto as setBack;
+    use Backmove {
+        Backmove::setBackAuto as setBack;
     }
     
     public function setTransmissionAuto()

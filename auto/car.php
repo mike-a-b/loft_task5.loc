@@ -1,10 +1,11 @@
 <?php
 
-namespace auto;
+namespace Auto;
 
-class car
+require_once "engine.php";
+class Car
 {
-    use engine;
+    use Engine;
     
     public function __construct($power, $transmission = "ручная")
     {

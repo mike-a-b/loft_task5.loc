@@ -1,13 +1,19 @@
 <?php
 
-namespace auto;
+namespace Auto;
 
-class niva extends car
+require_once "car.php";
+require_once "transmissionauto.php";
+require_once "transmissionmanual.php";
+class Niva extends Car
 {
     public $transmission;
     public $direct;
-    use transmissiomanual;
-    use transmissionauto;
+    use TransmissionAuto, TransmissionManual {
+        TransmissionAuto::setBackAuto insteadof TransmissionManual;
+        TransmissionAuto::setBack insteadof TransmissionManual;
+        TransmissionManual::setBackManual insteadof  TransmissionAuto;
+    }
     
     public function __construct($enginePower, $transmission = "ручная")
     {
@@ -30,26 +36,26 @@ class niva extends car
     public function startMove($distance, $speed, $direction = "вперед")
     {
         $haystack = ['вперед', "назад"];
-        $this->direct = in_array($direction, $haystack);
-        $this->direct = ($this->direct) ? $direction : "вперед";
+        $this->direct = isset($this->direct) ? $direction : "вперед";
+        $this->direct = in_array($this->direct, $haystack) ? $this->direct : null;
         if (intval($distance) > 0 && filter_var($speed, FILTER_SANITIZE_NUMBER_INT)) {
             print "Машина поехала...<br>".PHP_EOL;
         }
-        $speed = ($this->maxSpeed < (int)$speed) ? $this->maxSpeed : $speed;
+        $speed = is_bool($this->maxSpeed < (int)$speed) ? $this->maxSpeed : $speed;
         $speed = (int)($speed);
         if ($this->auto) {
-            $this->direct ? $this->driveUpAuto($speed) : $this->driveBackAuto($speed);
+            isset($this->direct) ? $this->driveUpAuto($speed) : $this->driveBackAuto($speed);
         } elseif ($this->manual) {
-            $this->direct ? $this->driveUpManual($speed) : $this->driveBackManual($speed);
+            isset($this->direct) ? $this->driveUpManual($speed) : $this->driveBackManual($speed);
         }
         
         $location = 0;
-        while ($direction - $location >= 10) {
+        while (($distance - $location) >= 10) {
             $location += 10;
             print "Проехали $location метров.<br>".PHP_EOL;
             $this->temperatureUp(5);
         }
-        if ($direction > $location) {
+        if ($distance > $location) {
             print "Проехали $location метров.<br>".PHP_EOL;
             $this->temperatureUp(round($distance - $location, 1, 1));
         }
