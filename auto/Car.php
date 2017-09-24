@@ -4,17 +4,28 @@ namespace Auto;
 
 class Car
 {
-    protected $engine;
-    protected $transmission;
-
-    public function __construct($engine_power, $trans = "ручная")
+    public $transmission;
+    use Engine;
+    /*
+    public $enginePower; //кол-во лош. сил
+    public $temperature;
+    public $maxSpeed; //л.с  x 2
+     */
+    
+    public function __construct($power, $trans = "ручная")
     {
-        $engine_power ? $this->engine = new Engine(50) : $this->engine  = new Engine();
+        $this->setPower($power);
+        $this->setTemperature(0);
+        $this->setMaxSpeed();
+        if ($this->enginePower > 0 && $this->enginePower < 200) {
+            exit("Установлен слишком сильный двигатель, перегрузка. Стоп".PHP_EOL);
+        }
+        
         if ($trans === "ручная") {
             $this->transmission = "ручная";
             print "Коробка передач ручная<br>\n";
         } elseif ($trans === "автоматическая") {
-            print "Коробка передач автоматическая<br>\n";
+            print "Коробка передач автоматическая<br>".PHP_EOL;
         }
     }
     
@@ -25,9 +36,8 @@ class Car
     
     public function __destruct()
     {
-        print "Машина утилизирована или продана<br>\n";
+        print "Водитель бросил машину<br>".PHP_EOL;
     }
-    
     
 }
 

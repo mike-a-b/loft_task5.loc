@@ -10,9 +10,8 @@ trait TransmissionManual
         BackMove::setBackManual as setBack;
     }
     
-    public function __construct()
+    public function setTransmission()
     {
-        parent:$this->__construct();
         print 'Установлена ручная коробка передач в машине<br>'.PHP_EOL;
     }
     
